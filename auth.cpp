@@ -17,7 +17,7 @@ bool authenticateUser(){
     return true;
   }
   else{
-    cout << "This authetication is incorrect. Incorrect user OR password.\n" << endl
+    cout << "This authetication is incorrect. Incorrect user OR password.\n" << endl;
       return false;
   }
   
