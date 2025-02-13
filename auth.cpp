@@ -4,7 +4,8 @@
 using namespace std;
 
 bool authenticateUser(){
-  string userName, PWord;
+  string userName; 
+  string PWord;
   const string userName = "ADMIN";
   const string PWord = "OSisthebest23";
 
