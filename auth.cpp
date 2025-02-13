@@ -6,8 +6,8 @@ using namespace std;
 bool authenticateUser(){
   string userName; 
   string PWord;
-  const string userName = "ADMIN";
-  const string PWord = "OSisthebest23";
+  const string correctuserName = "ADMIN";
+  const string correctPWord = "OSisthebest23";
 
   cout << "Enter username: " << userName << endl;
   cout << "Enter password: " << PWord << endl;
