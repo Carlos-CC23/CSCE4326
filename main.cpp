@@ -6,7 +6,9 @@ int main() {
 
   if (authenticateUser()){
     std::cout << "Successful. Welcome";
-    } else {
+    } 
+  else {
+    std::cout << "Failed. Try Again";
   }
 
   return 0;
