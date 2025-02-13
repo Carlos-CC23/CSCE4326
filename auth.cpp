@@ -9,8 +9,10 @@ bool authenticateUser(){
   const string correctuserName = "ADMIN";
   const string correctPWord = "OSisthebest23";
 
-  cout << "Enter username: " << userName << endl;
-  cout << "Enter password: " << PWord << endl;
+  cout << "Enter username: " << endl;
+  cin >> userName;
+  cout << "Enter password: " << endl; 
+  cin >> PWord;
 
   if(userName == correctuserName && PWord == correctPWord){
     cout << "This authetication is correct. Hello, " << userName << "!\n" << endl;
