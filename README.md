@@ -7,3 +7,8 @@ Description: Semester Project to design and implement a simplified operating sys
 Instructions: First step to do is compile the program. 
 The second part is that the system boot it up then enter the correct username which is ADMIN and password which is OSisthebest23. 
 Then you will be succesfully logged in.
+
+-When compiling in g++ , follows these steps:
+g++ main.cpp auth.cpp -o program
+./program
+
