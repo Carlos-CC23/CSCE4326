@@ -1,5 +1,6 @@
 #include <iostream>
 #include "auth.h"
+#include "Process.h"
 
 int main() {
   //Message displayed when program first runs
