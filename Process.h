@@ -8,7 +8,7 @@ class Process {
 private:
   int pid;
   ProcessState state:
-  int Reamainig_times;
+  int Remaining_times;
   int waiting_time;
 
 public:
