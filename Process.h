@@ -3,16 +3,17 @@
 #include <iostream>
 #include <string>
 
+
 enum ProcessState {NEW, READY, RUNNING, WAITING, TERMINATED};
 
 //Convert the enum state into strings
-string stateToString{
-    switch(case){
+std::string stateToString(ProcessState state) {
+    switch(state) {
         case NEW:
             return "NEW";
         case READY;
             return "READY";
-        case RUNNNING:
+        case RUNNING:
             return "RUNNING";
         case WAITING:
             return "WAITING";
@@ -70,7 +71,33 @@ bool hasIOOperations() const {
     return io_operations;
 }
 
+//settters
+void setState(ProcessState newState) {
+    state = newState; }
 
+void setWaitingTime(int time) {
+    waiting_time = time; }
+
+void setTurnaround(int time) {
+    turnaround_time = time - arrival_time; }
+
+void execute(int time_quantum) {
+    if (remaining_time > 0) {
+        remaining_time -= time_quantum;
+        if (remaing_time <= 0) {
+            remainig_time = 0;
+            state = TERMINATED;
+        }
+    }
+}
+
+//display the process info
+void displayProcessInfo() const {
+    std::court << "Process ID: " << pid << " | State: " << stateToString(state)
+        << " | Arrival Time: " << arrival_time << " | Burst Time: " << burst_time
+        << " | Remaining Time: " << remaining_time << " | Priority: " << priority
+        << " | Memory: " << memory_required << " | Waiting Time: " << waiting_time
+        << " | Turnaround Time: " << turnaround_time << "\n";
 
 };
-
+#endif //PROCESS_H
