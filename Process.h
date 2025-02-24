@@ -89,8 +89,8 @@ void setTurnaround(int time) {
 void execute(int time_quantum) {
     if (remaining_time > 0) {
         remaining_time -= time_quantum;
-        if (remaing_time <= 0) {
-            remainig_time = 0;
+        if (remaining_time <= 0) {
+            remaining_time = 0;
             state = TERMINATED;
         }
     }
