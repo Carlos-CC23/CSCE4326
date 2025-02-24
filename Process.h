@@ -108,6 +108,7 @@ void displayProcessInfo() const {
         << " | Remaining Time: " << remaining_time << " | Priority: " << priority
         << " | Memory: " << memory_required << " | Waiting Time: " << waiting_time
         << " | Turnaround Time: " << turnaround_time << "\n";
+}
 
 };
 #endif //PROCESS_H
