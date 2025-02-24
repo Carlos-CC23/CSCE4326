@@ -30,6 +30,11 @@ private:
   ProcessState state:
   int Remaining_times;
   int waiting_time;
+  int burst_time;
+  int priority;
+  int memory_required;
+  int turnaround_time;
+  bool io_operations;
 
 public:
   Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations)
@@ -89,6 +94,11 @@ void execute(int time_quantum) {
             state = TERMINATED;
         }
     }
+}
+
+//Simulates a waiting in ready queue
+void updateWaitingTime(int time_units) {
+    waiting_time += time_units;
 }
 
 //display the process info
