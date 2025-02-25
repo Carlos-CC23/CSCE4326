@@ -35,9 +35,9 @@ int Process::getTurnaroundTime() const {
 int Process::getMemoryRequired() const { 
   return memory_required; 
 }
-bool Process::hasIOOperations() const { 
-  return io_operations; 
-}
+std::string Process::hasIOOperations() const { 
+    return io_operations ? "Yes" : "No"; }
+
 
 // Setters
 void Process::setState(ProcessState newState) {
@@ -61,6 +61,13 @@ void Process::decrementExecutionTime(int timeSlice) {
     }
 }
 
+void Process::runProcess(int timeSlice) {
+    if (state == READY) {
+        state = RUNNING;
+    }
+    decrementExecutionTime(timeSlice);
+}
+
 // Returns a string representation of the current process state.
 std::string Process::getStateString() const {
     switch(state) {
@@ -77,4 +84,19 @@ std::string Process::getStateString() const {
         default: 
             return "UNKNOWN";
     }
+}
+
+// displays process details
+void Process::displayProcessInfo() const {
+    std::cout << "Process ID: " << pid
+              << " | State: " << getStateString()
+              << " | Arrival Time: " << arrival_time
+              << " | Burst Time: " << burst_time
+              << " | Remaining Time: " << remaining_time
+              << " | Priority: " << priority
+              << " | Memory: " << memory_required
+              << " | I/O Required: " << hasIOOperations()
+              << " | Waiting Time: " << waiting_time
+              << " | Turnaround Time: " << turnaround_time << "\n";
+
 }
