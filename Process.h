@@ -1,5 +1,6 @@
-#define PROCESS_H
 #ifndef PROCESS_H
+#define PROCESS_H
+
 #include <iostream>
 #include <string>
 
@@ -7,40 +8,44 @@ enum ProcessState {NEW, READY, RUNNING, WAITING, TERMINATED};
 
 class Process {
 private:
-  int pid;
-  ProcessState state:
-  int Remaining_times;
-  int waiting_time;
-  int burst_time;
-  int priority;
-  int memory_required;
-  int turnaround_time;
-  bool io_operations;
+    int pid;
+    int arrival_time;
+    int burst_time;
+    int priority;
+    int remaining_time;
+    int waiting_time;
+    int turnaround_time;
+    int memory_required;
+    bool io_operations;
+    ProcessState state;
+
 
 public:
-Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations);
+    //constructor
+    Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations);
 
-//Getters for the process attributes
-int getPid() const;
-int getArrivalTime() const;
-int getBurstTime() const;
-int getPriority() const;
-ProcessState getState() const;
-int getRemainingTime() const;
-int getWaitingTime() const;
-int getTurnaroundTime() const;
-int getMemoryRequired() const;
-bool hasIOOperations() const;
+//getters
+    int getPid() const;
+    int getArrivalTime() const;
+    int getBurstTime() const;
+    int getPriority() const;
+    ProcessState getState() const;
+    int getRemainingTime() const;
+    int getWaitingTime() const;
+    int getTurnaroundTime() const;
+    int getMemoryRequired() const;
+    std::string hasIOOperations() const;
 
-//settters
-void setState(ProcessState newState);
-void setWaitingTime(int time);
-void setTurnaround(int time);
+    //setters
+    void setState(ProcessState newState);
+    void setWaitingTime(int time);
+    void setTurnaroundTime(int time);
 
-void decrementExecutionTime(int timeSlice);
-
-// Helper method to return the state as a string (for display purposes).
-std::string getStateString() const;
-
+    //methods
+    void decrementExecutionTime(int timeSlice);
+    void runProcess(int timeSlice); //simulate running the process
+    std::string getStateString() const;
+    void displayProcessInfo() const; //improved display
 };
-#endif //PROCESS_H
+
+#endif // PROCESS_H
