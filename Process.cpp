@@ -1,4 +1,5 @@
 #include "Process.h"
+#include <iostream>
 
 // Constructor initializes all attributes
 Process::Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations)
