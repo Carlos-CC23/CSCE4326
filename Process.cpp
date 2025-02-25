@@ -64,11 +64,17 @@ void Process::decrementExecutionTime(int timeSlice) {
 // Returns a string representation of the current process state.
 std::string Process::getStateString() const {
     switch(state) {
-        case NEW: return "NEW";
-        case READY: return "READY";
-        case RUNNING: return "RUNNING";
-        case WAITING: return "WAITING";
-        case TERMINATED: return "TERMINATED";
-        default: return "UNKNOWN";
+        case NEW: 
+            return "NEW";
+        case READY: 
+            return "READY";
+        case RUNNING: 
+            return "RUNNING";
+        case WAITING: 
+            return "WAITING";
+        case TERMINATED: 
+            return "TERMINATED";
+        default: 
+            return "UNKNOWN";
     }
 }
