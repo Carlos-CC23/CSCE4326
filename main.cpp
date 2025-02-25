@@ -11,7 +11,8 @@ int main() {
   //Statement calls the function
   if (authenticateUser()){
     cout << "Successful. Welcome";
-
+    
+    //Code below is our test cases to create process and the different state changes
     //Creating two sample processes
     Process p1(1, 0, 10, 1, 100, false);
     Process p2(2, 2, 15, 2, 200, true);
