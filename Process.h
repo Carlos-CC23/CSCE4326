@@ -8,16 +8,16 @@ enum ProcessState {NEW, READY, RUNNING, WAITING, TERMINATED};
 
 class Process {
 private:
-    int pid;
-    int arrival_time;
-    int burst_time;
-    int priority;
-    int remaining_time;
-    int waiting_time;
-    int turnaround_time;
-    int memory_required;
-    bool io_operations;
-    ProcessState state;
+    int pid; //Process Identifier
+    int arrival_time; //The time when process enters the system
+    int burst_time; //Required CPU execution time
+    int priority; //Priority level of process
+    int remaining_time; //CPU time left for completion
+    int waiting_time; //The total time spent on waiting in the ready queue
+    int turnaround_time; //The total time from arrival to completion
+    int memory_required; //Memory required by the process
+    bool io_operations; // Indicates if the process has I/O Operations
+    ProcessState state; //The current process states -> NEW, READY, RUNNING, WAITING, TERMINATED
 
 
 public:
