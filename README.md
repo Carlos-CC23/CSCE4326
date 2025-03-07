@@ -14,7 +14,8 @@ Then you will be succesfully logged in.
 -When using g++ , follows these steps to compile & run program:
 -
 type -> g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
-then type -> .\os_simulator.exe
+  
+  then type -> .\os_simulator.exe
 
 
 
