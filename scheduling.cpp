@@ -15,6 +15,7 @@ void fcfsScheduling(std::vector<Process>& processes) {
             currentTime = p.getArrivalTime();
         }
         int completionTime = currentTime + p.getBurstTime();
+        p.setCompletionTime(completionTime);
         int turnaroundTime = completionTime - p.getArrivalTime();
         int waitingTime = turnaroundTime - p.getBurstTime();
 
@@ -50,6 +51,7 @@ void sjfNonPreemptiveScheduling(std::vector<Process>& processes) {
         }
 
         int completionTime = currentTime + shortest->getBurstTime();
+        shortest->setCompletionTime(completionTime);
         int turnaroundTime = completionTime - shortest->getArrivalTime();
         int waitingTime = turnaroundTime - shortest->getBurstTime();
 
@@ -61,13 +63,9 @@ void sjfNonPreemptiveScheduling(std::vector<Process>& processes) {
 
     calculateMetrics(processes);
 }
-
 void sjfPreemptiveScheduling(std::vector<Process>& processes) {
     int n = processes.size();
     int currentTime = 0, completed = 0;
-    int minRemainingTime = std::numeric_limits<int>::max();
-    int shortest = -1;
-    bool found = false;
 
     std::vector<int> remainingTime(n);
     for (int i = 0; i < n; i++) {
@@ -75,36 +73,42 @@ void sjfPreemptiveScheduling(std::vector<Process>& processes) {
     }
 
     while (completed < n) {
-        found = false;
+        int shortest = -1;
+        int minRemainingTime = std::numeric_limits<int>::max();
+
         for (int i = 0; i < n; i++) {
             if (processes[i].getArrivalTime() <= currentTime && remainingTime[i] > 0) {
                 if (remainingTime[i] < minRemainingTime) {
                     minRemainingTime = remainingTime[i];
                     shortest = i;
-                    found = true;
                 }
             }
         }
 
-        if (!found) {
+        if (shortest == -1) {
             currentTime++;
             continue;
         }
 
         remainingTime[shortest]--;
-        minRemainingTime = remainingTime[shortest];
 
         if (remainingTime[shortest] == 0) {
             completed++;
-            minRemainingTime = std::numeric_limits<int>::max();
             int completionTime = currentTime + 1;
+            processes[shortest].setCompletionTime(completionTime);
             int turnaroundTime = completionTime - processes[shortest].getArrivalTime();
             int waitingTime = turnaroundTime - processes[shortest].getBurstTime();
 
             processes[shortest].setWaitingTime(waitingTime);
+            processes[shortest].setTurnaroundTime(turnaroundTime);
         }
 
         currentTime++;
+    }
+
+    std::cout << "\nSJF Preemptive Scheduling Results:\n";
+    for (const auto& p : processes) {
+        p.displayProcessInfo();
     }
 
     calculateMetrics(processes);
