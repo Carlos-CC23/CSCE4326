@@ -4,7 +4,7 @@
 // Constructor initializes all attributes
 Process::Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations)
     : pid(pid), arrival_time(arrival_time), burst_time(burst_time), priority(priority),
-      state(NEW), remaining_time(burst_time), waiting_time(0), turnaround_time(0),
+      state(NEW), remaining_time(burst_time), waiting_time(0), turnaround_time(0), completion_time(0),
       memory_required(memory_required), io_operations(io_operations)
 {}
 
@@ -33,6 +33,9 @@ int Process::getWaitingTime() const {
 int Process::getTurnaroundTime() const { 
   return turnaround_time; 
 }
+int Process::getCompletionTime() const { 
+  return completion_time; 
+}
 int Process::getMemoryRequired() const { 
   return memory_required; 
 }
@@ -51,6 +54,10 @@ void Process::setWaitingTime(int time) {
 
 void Process::setTurnaroundTime(int time) {
     turnaround_time = time;
+}
+
+void Process::setCompletionTime(int time) { 
+  completion_time = time; 
 }
 
 // This method simulates the process running by decrementing the remaining time.
@@ -93,6 +100,7 @@ void Process::displayProcessInfo() const {
               << " | State: " << getStateString()
               << " | Arrival Time: " << arrival_time
               << " | Burst Time: " << burst_time
+              << " | Completion Time: " << completion_time
               << " | Remaining Time: " << remaining_time
               << " | Priority: " << priority
               << " | Memory: " << memory_required
