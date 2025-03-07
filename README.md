@@ -12,7 +12,9 @@ The second part is that the system boot it up then enter the correct username wh
 Then you will be succesfully logged in.
 
 -When using g++ , follows these steps to compile & run program:
-g++ main.cpp auth.cpp -o program
+-
+type -> g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
+then type -> .\os_simulator.exe
 
-./program
+
 
