@@ -13,6 +13,7 @@ Then you will be succesfully logged in.
 
 Once you logged in, the program will sample through a process. Each process has an ID, arrival time, burst time, priority, and memory requirements, among other attributes. The program then simulates process execution, updating states and tracking completion time, turnaround time, and waiting time. Next, it runs three scheduling algorithms: First-Come-First-Serve (FCFS), Shortest Job First Non-Preemptive (SJF NP), and Shortest Job First Preemptive (SJF P). Each algorithm determines when processes should execute, calculates key metrics, and prints the results. Finally, the program displays detailed process statistics before computing average turnaround time and waiting time for each scheduling strategy.
 
+--------------------------------------------------------------------------------------
 -When using g++ , follows these steps to compile & run program:
 -
 type -> g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
