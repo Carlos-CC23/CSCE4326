@@ -5,15 +5,22 @@ Project for OS Spring 2025
 
 -Team Members: Carlos Chacon & Dante Trevino
 
--Description: Semester Project to design and implement a simplified operating system simulator using C++.
+## Description
+This project simulates an operating system's CPU scheduling (FCFS, SJF Non-Preemptive, SJF Preemptive) and virtual memory management using per-process page tables and virtual-to-physical address translation.
 
--Instructions: First step to do is compile the program. 
-The second part is that the system boot it up then enter the correct username which is ADMIN and password which is OSisthebest23. 
-Then you will be succesfully logged in.
+## Features
+- User Authentication
+- Process State Transitions
+- Scheduling Algorithms:
+  - First-Come-First-Serve (FCFS)
+  - Shortest Job First (Non-Preemptive & Preemptive)
+- Virtual Memory:
+  - Page table per process
+  - Address translation with page mapping
+  - Page fault simulation (basic)
 
-Once you logged in, the program will sample through a process. Each process has an ID, arrival time, burst time, priority, and memory requirements, among other attributes. The program then simulates process execution, updating states and tracking completion time, turnaround time, and waiting time. Next, it runs three scheduling algorithms: First-Come-First-Serve (FCFS), Shortest Job First Non-Preemptive (SJF NP), and Shortest Job First Preemptive (SJF P). Each algorithm determines when processes should execute, calculates key metrics, and prints the results. Finally, the program displays detailed process statistics before computing average turnaround time and waiting time for each scheduling strategy.
+## How to Compile
 
---------------------------------------------------------------------------------------
 -When using g++ , follows these steps to compile & run program:
 -
 type -> g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
