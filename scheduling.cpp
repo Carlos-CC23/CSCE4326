@@ -19,10 +19,16 @@ void fcfsScheduling(std::vector<Process>& processes) {
         int turnaroundTime = completionTime - p.getArrivalTime();
         int waitingTime = turnaroundTime - p.getBurstTime();
 
-        p.setWaitingTime(waitingTime);  // Use an existing function
+        p.setWaitingTime(waitingTime);
+        p.setTurnaroundTime(turnaroundTime);
         currentTime = completionTime;
     }
 
+    std::cout << "\nFCFS Scheduling Results:\n";
+    for (const auto& p : processes) {
+        p.displayProcessInfo();
+    }
+    
     calculateMetrics(processes);
 }
 
@@ -51,18 +57,25 @@ void sjfNonPreemptiveScheduling(std::vector<Process>& processes) {
         }
 
         int completionTime = currentTime + shortest->getBurstTime();
-        shortest->setCompletionTime(completionTime);
+        shortest->setCompletionTime(completionTime); 
         int turnaroundTime = completionTime - shortest->getArrivalTime();
         int waitingTime = turnaroundTime - shortest->getBurstTime();
 
         shortest->setWaitingTime(waitingTime);
+        shortest->setTurnaroundTime(turnaroundTime);
         currentTime = completionTime;
 
         remainingProcesses.erase(std::remove(remainingProcesses.begin(), remainingProcesses.end(), shortest), remainingProcesses.end());
     }
 
+    std::cout << "\nSJF Non-Preemptive Scheduling Results:\n";
+    for (const auto& p : processes) {
+        p.displayProcessInfo();
+    }
+
     calculateMetrics(processes);
 }
+
 void sjfPreemptiveScheduling(std::vector<Process>& processes) {
     int n = processes.size();
     int currentTime = 0, completed = 0;
@@ -128,5 +141,3 @@ void calculateMetrics(std::vector<Process>& processes) {
     std::cout << "Average Turnaround Time: " << totalTurnaroundTime / processes.size() << std::endl;
     std::cout << "Average Waiting Time: " << totalWaitingTime / processes.size() << std::endl;
 }
-//g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
-//.\os_simulator.exe
