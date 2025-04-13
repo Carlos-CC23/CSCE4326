@@ -11,7 +11,7 @@ Process::Process(int pid, int arrival_time, int burst_time, int priority, int me
       memory_required(memory_required), io_operations(io_operations)
 
 {
-  initializePageTable(); // ✅ Add this line inside the constructor
+  initializePageTable();
 }
 
 // Getters
@@ -101,8 +101,6 @@ void Process::runProcess(int timeSlice) {
     decrementExecutionTime(timeSlice);
 }
 
-
-
 void Process::initializePageTable() {
   pageTable.resize(NUM_VIRTUAL_PAGES);
   for (auto& entry : pageTable) {
@@ -120,7 +118,6 @@ void Process::mapPage(int virtualPage, int frameNumber) {
       pageTable[virtualPage].dirty = false;
   }
 }
-
 
 // Returns a string representation of the current process state.
 std::string Process::getStateString() const {
