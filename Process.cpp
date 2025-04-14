@@ -10,7 +10,7 @@ Process::Process(int pid, int arrival_time, int burst_time, int priority, int me
 {
     initializePageTable();
     initializeTLB(); // TLB
-    pageProtectionTable.resize(NUM_VIRTUAL_PAGES, READ_WRITE); // Default protection
+    pageProtectionTable.resize(NUM_VIRTUAL_PAGES, READ_WRITE); 
 }
 
 // Getters
@@ -84,7 +84,7 @@ int Process::translateVirtualAddress(int virtualAddress, bool write) {
     // TLB update
     int newTLBIndex = pageNumber % TLB_SIZE;
     tlb[newTLBIndex] = { pageNumber, entry.frameNumber, true };
-    std::cout << "[TLB UPDATE] Inserted page " << pageNumber << " → frame "
+    std::cout << "[TLB UPDATE] Inserted page into frame "
               << entry.frameNumber << " into TLB at index " << newTLBIndex << ".\n";
 
     return entry.frameNumber * PAGE_SIZE + offset;
