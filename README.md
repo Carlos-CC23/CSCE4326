@@ -30,7 +30,7 @@ type -> g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
   
 ## Log in:
 -Username: ADMIN
--Password; OSisthebest23
+-Password: OSisthebest23
 
 
 
