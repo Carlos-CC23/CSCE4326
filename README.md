@@ -26,6 +26,13 @@ This project simulates an operating system's CPU scheduling (FCFS, SJF Non-Preem
 type -> g++ main.cpp auth.cpp Process.cpp scheduling.cpp -o os_simulator.exe
   
   then type -> .\os_simulator.exe
+## Log in:
+-Username: ADMIN
+-Password; OSisthebest23
 
+## Sample configuration files
+
+## Link to GitHub Repository
+https://github.com/Carlos-CC23/CSCE4326
 
 
