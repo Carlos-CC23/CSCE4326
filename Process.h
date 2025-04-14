@@ -1,14 +1,23 @@
 #ifndef PROCESS_H
 #define PROCESS_H
+
 #define PAGE_SIZE 4096 // 4KB
 #define VIRTUAL_MEMORY_SIZE (64 * 1024) // 64KB per process
 #define PHYSICAL_MEMORY_SIZE (32 * 1024) // 32KB total
 #define NUM_VIRTUAL_PAGES (VIRTUAL_MEMORY_SIZE / PAGE_SIZE)
 #define NUM_PHYSICAL_FRAMES (PHYSICAL_MEMORY_SIZE / PAGE_SIZE)
+#define TLB_SIZE 4 // NEW: TLB size
 
 #include <iostream>
 #include <vector>
 #include <string>
+#include <unordered_map>
+
+// NEW: Page protection types
+enum PageProtection {
+    READ_ONLY,
+    READ_WRITE
+};
 
 struct PageTableEntry {
     bool valid;
@@ -16,29 +25,31 @@ struct PageTableEntry {
     bool dirty;
 };
 
+struct TLBEntry {
+    int virtualPage;
+    int frameNumber;
+    bool valid;
+};
+
 enum ProcessState {NEW, READY, RUNNING, WAITING, TERMINATED};
 
 class Process {
 private:
-    int pid; //Process Identifier
-    int arrival_time; //The time when process enters the system
-    int burst_time; //Required CPU execution time
-    int priority; //Priority level of process
-    int remaining_time; //CPU time left for completion
-    int waiting_time; //The total time spent on waiting in the ready queue
-    int turnaround_time; //The total time from arrival to completion
-    int completion_time; // When the process finishes execution
-    int memory_required; //Memory required by the process
-    bool io_operations; // Indicates if the process has I/O Operations
-    ProcessState state; //The current process states -> NEW, READY, RUNNING, WAITING, TERMINATED
+    int pid, arrival_time, burst_time, priority, remaining_time;
+    int waiting_time, turnaround_time, completion_time;
+    int memory_required;
+    bool io_operations;
+    ProcessState state;
     std::vector<PageTableEntry> pageTable;
 
+    // NEW
+    std::vector<TLBEntry> tlb;
+    std::vector<PageProtection> pageProtectionTable;
 
 public:
-    //constructor
     Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations);
 
-    //getters
+    // Getters
     int getPid() const;
     int getArrivalTime() const;
     int getBurstTime() const;
@@ -51,22 +62,28 @@ public:
     int getMemoryRequired() const;
     std::string hasIOOperations() const;
 
-    //setters
+    // Setters
     void setState(ProcessState newState);
     void setWaitingTime(int time);
     void setTurnaroundTime(int time);
     void setCompletionTime(int time);
 
-    //methods
+    // Execution
     void decrementExecutionTime(int timeSlice);
-    void runProcess(int timeSlice); //simulate running the process
+    void runProcess(int timeSlice);
     std::string getStateString() const;
-    void displayProcessInfo() const; //improved display
+    void displayProcessInfo() const;
 
-    //Virtual address
+    // Virtual Memory
     void initializePageTable();
-    int translateVirtualAddress(int virtualAddress) const;
-    void mapPage(int virtualPage, int frameNumber); // optional helper
+    void initializeTLB(); 
+    int translateVirtualAddress(int virtualAddress, bool write = false);
+    int translateWithTLB(int virtualAddress) const;
+    void mapPage(int virtualPage, int frameNumber, bool readOnly = false); 
 
+
+    void setPageProtection(int virtualPage, PageProtection protection);
+    bool simulateAccess(int virtualAddress, bool write); 
 };
+
 #endif // PROCESS_H
